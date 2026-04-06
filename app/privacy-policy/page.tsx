@@ -1,6 +1,21 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
+
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/#about" },
+  { label: "Services", href: "/#services" },
+  { label: "Funding", href: "/funding" },
+  { label: "Results", href: "/#results" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contact", href: "/#contact" },
+];
 
 export default function PrivacyPolicyPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <main className="maven-page">
       <header className="site-header">
@@ -10,20 +25,49 @@ export default function PrivacyPolicyPage() {
           </Link>
 
           <nav className="desktop-nav">
-            <Link href="/" className="nav-link">Home</Link>
-            <Link href="/#about" className="nav-link">About</Link>
-            <Link href="/#services" className="nav-link">Services</Link>
-            <Link href="/funding" className="nav-link">Funding</Link>
-            <Link href="/#results" className="nav-link">Results</Link>
-            <Link href="/#faq" className="nav-link">FAQ</Link>
-            <Link href="/#contact" className="nav-link">Contact</Link>
+            {navLinks.map((item) => (
+              <Link key={item.label} href={item.href} className="nav-link">
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
-          <a href="/#contact" className="header-cta">Book a Call</a>
+          <div className="header-actions">
+            <button
+              type="button"
+              className={`mobile-menu-toggle ${mobileMenuOpen ? "open" : ""}`}
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              aria-label="Toggle navigation"
+              aria-expanded={mobileMenuOpen}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+
+            <a href="/#contact" className="header-cta">
+              Book a Call
+            </a>
+          </div>
+        </div>
+
+        <div className={`mobile-nav ${mobileMenuOpen ? "open" : ""}`}>
+          <div className="container mobile-nav-inner">
+            {navLinks.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="mobile-nav-link"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </header>
 
-      <section className="section-shell">
+      <section className="section-shell legal-shell">
         <div className="container legal-page">
           
           <h1>Privacy Policy</h1>
@@ -91,6 +135,8 @@ export default function PrivacyPolicyPage() {
               <img src="/logo.png" alt="Mazaliq" className="footer-logo" />
               <p className="footer-brand-text">
                 Consulting and funding strategy for home service businesses.
+                Helping owners improve performance, make smarter decisions,
+                and grow with more control.
               </p>
             </div>
 
@@ -123,3 +169,4 @@ export default function PrivacyPolicyPage() {
     </main>
   );
 }
+

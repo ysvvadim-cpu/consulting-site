@@ -96,6 +96,7 @@ function MinusIcon() {
 export default function FundingPage() {
   useReveal();
   const [openFaq, setOpenFaq] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <main className="maven-page">
@@ -113,91 +114,68 @@ export default function FundingPage() {
             ))}
           </nav>
 
-          <a href="/#contact" className="header-cta">
-            Book a Call
-          </a>
+          <div className="header-actions">
+            <button
+              type="button"
+              className={`mobile-menu-toggle ${mobileMenuOpen ? "open" : ""}`}
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              aria-label="Toggle navigation"
+              aria-expanded={mobileMenuOpen}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+
+            <a href="/#contact" className="header-cta">
+              Book a Call
+            </a>
+          </div>
+        </div>
+
+        <div className={`mobile-nav ${mobileMenuOpen ? "open" : ""}`}>
+          <div className="container mobile-nav-inner">
+            {navLinks.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                className="mobile-nav-link"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
         </div>
       </header>
 
-      <section className="hero section-shell reveal hero-bg">
+      <section className="hero section-shell reveal hero-bg funding-hero">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <h1>
-              Business Funding
-              <br />
-              for Home Service
-              <br />
-              Companies
-            </h1>
+            <div className="hero-copy-inner">
+              <h1>
+                Business Funding
+                <br />
+                for Home Service
+                <br />
+                Companies
+              </h1>
 
-            <p>
-              We help you choose the right capital option, avoid expensive mistakes,
-              and build a smarter path toward lower-cost funding.
-            </p>
+              <p>
+                We help you choose the right capital option, avoid expensive mistakes,
+                and build a smarter path toward lower-cost funding.
+              </p>
 
-            <a href="/#contact" className="primary-btn">
-              Talk Through Your Options
-            </a>
+              <a href="/#contact" className="primary-btn">
+                Talk Through Your Options
+              </a>
+            </div>
           </div>
-
-          <div className="hero-form-wrap">
-  <div className="hero-form-card">
-    <div className="hero-form-top">
-      <div className="eyebrow">GET STARTED</div>
-      <h3>Book a Strategy Call</h3>
-      <p>
-        Tell us a little about your business and we’ll reach out with the next step.
-      </p>
-    </div>
-
-    <form className="hero-form">
-      <div className="form-row">
-        <input type="text" placeholder="Full name" />
-      </div>
-
-      <div className="form-row">
-        <input type="text" placeholder="Business name" />
-      </div>
-
-      <div className="form-row two-col">
-        <input type="email" placeholder="Email address" />
-        <input type="tel" placeholder="Phone number" />
-      </div>
-
-      <div className="form-row">
-        <select defaultValue="">
-          <option value="" disabled>
-            Service needed
-          </option>
-          <option>Business Consulting</option>
-          <option>Funding Guidance</option>
-          <option>Operations Review</option>
-          <option>Growth Strategy</option>
-        </select>
-      </div>
-
-      <div className="form-row">
-        <textarea
-          placeholder="Tell us what you need help with"
-          rows={4}
-        />
-      </div>
-
-      <button type="submit" className="hero-form-btn">
-        Request Consultation
-      </button>
-    </form>
-  </div>
-</div>
         </div>
       </section>
 
-     
-
-      {/* ===== WHAT WE DO ===== */}
       <section className="section-shell reveal">
         <div className="container split-section">
-
           <div className="split-copy">
             <div className="eyebrow">WHAT WE DO</div>
 
@@ -219,75 +197,87 @@ export default function FundingPage() {
           </div>
 
           <div className="split-media media-frame tall-frame">
-            <img
-              src="/funding.png"
-              alt="Business planning"
-            
-            />
-          </div>
-
-        </div>
-      </section>
-
-      {/* ===== STRATEGY ===== */}
-      <section className="blue-band reveal">
-        <div className="container">
-
-          <h2>
-            THE GOAL IS NOT JUST FUNDING — IT’S BETTER FUNDING OVER TIME.
-          </h2>
-
-          <p className="band-sub">
-            We help you avoid getting stuck and build a path forward.
-          </p>
-
-          <div className="band-columns">
-
-            <div className="band-col">
-              <div className="band-icon">⚠️</div>
-              <h3>AVOID MISTAKES</h3>
-              <p>
-                Understand what you are actually signing up for before committing.
-              </p>
-            </div>
-
-            <div className="band-col">
-              <div className="band-icon">🧠</div>
-              <h3>MAKE SMARTER DECISIONS</h3>
-              <p>
-                Choose the option that fits your situation, not just the fastest one.
-              </p>
-            </div>
-
-            <div className="band-col">
-              <div className="band-icon">📉</div>
-              <h3>LOWER COST OVER TIME</h3>
-              <p>
-                Build toward better, cheaper capital as the business improves.
-              </p>
-            </div>
-
+            <img src="/funding.png" alt="Business planning" />
           </div>
         </div>
       </section>
 
-      {/* ===== OPTIONS GRID ===== */}
+     <section className="funding-strategy-section reveal">
+  <div className="container">
+    <div className="funding-strategy-header">
+      <h2>THE GOAL IS NOT JUST FUNDING — IT’S BETTER FUNDING OVER TIME.</h2>
+      <p>
+        We help you avoid getting stuck and build a path toward stronger,
+        lower-cost capital over time.
+      </p>
+    </div>
+
+    <div className="funding-strategy-grid">
+      <div className="funding-strategy-card">
+        <div className="funding-strategy-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <path d="M12 9v4" />
+            <path d="M12 17h.01" />
+            <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" />
+          </svg>
+        </div>
+        <h3>Avoid Mistakes</h3>
+        <p>
+          Understand what you are actually signing up for before committing.
+        </p>
+      </div>
+
+      <div className="funding-strategy-card">
+        <div className="funding-strategy-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <path d="M9 18h6" />
+            <path d="M10 22h4" />
+            <path d="M12 2a7 7 0 0 0-4 12.74C8.63 15.19 9 15.86 9 16.57V17h6v-.43c0-.71.37-1.38 1-1.83A7 7 0 0 0 12 2Z" />
+          </svg>
+        </div>
+        <h3>Make Smarter Decisions</h3>
+        <p>
+          Choose the option that fits your situation, not just the fastest one.
+        </p>
+      </div>
+
+      <div className="funding-strategy-card">
+        <div className="funding-strategy-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <path d="m16 6-8 8" />
+            <path d="m8 6 8 8" opacity="0.25" />
+            <path d="M3 7h4" />
+            <path d="M17 17h4" />
+            <path d="M14 3v4" />
+            <path d="M10 17v4" />
+          </svg>
+        </div>
+        <h3>Lower Cost Over Time</h3>
+        <p>
+          Build toward better, cheaper capital as the business improves.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
       <section className="section-shell reveal">
         <div className="container">
           <h2 className="center-title">Funding Options</h2>
 
-          <div className="help-grid">
+          <div className="help-grid funding-options-grid">
             {fundingOptions.map((item) => (
-              <div className="help-card" key={item.title}>
-                <h4>{item.title}</h4>
-                <p>{item.text}</p>
+              <div className="help-card funding-option-card" key={item.title}>
+                <div className="help-card-copy">
+                  <h4>{item.title}</h4>
+                  <p>{item.text}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== FAQ ===== */}
       <section className="section-shell reveal faq-section">
         <div className="container faq-container">
           <div className="faq-header">
@@ -319,68 +309,62 @@ export default function FundingPage() {
         </div>
       </section>
 
-      
-
-      {/* ===== CTA / FOOTER ===== */}
       <footer className="site-footer reveal">
-  <div className="container footer-shell">
-    <div className="footer-main">
-      <div className="footer-brand-block">
-        <img src="/logo.png" alt="Mazaliq" className="footer-logo" />
-        <p className="footer-brand-text">
-          Consulting and funding strategy for home service businesses.
-          Helping owners improve performance, make smarter decisions,
-          and grow with more control.
-        </p>
-      </div>
+        <div className="container footer-shell">
+          <div className="footer-main">
+            <div className="footer-brand-block">
+              <img src="/logo.png" alt="Mazaliq" className="footer-logo" />
+              <p className="footer-brand-text">
+                Consulting and funding strategy for home service businesses.
+                Helping owners improve performance, make smarter decisions,
+                and grow with more control.
+              </p>
+            </div>
 
-      <div className="footer-links-grid">
-        <div className="footer-col">
-          <h4>Navigation</h4>
-          <a href="/">Home</a>
-          <a href="/#about">About</a>
-          <a href="/#services">Services</a>
-          <a href="/funding">Funding</a>
-          <a href="/#results">Results</a>
-          <a href="/#faq">FAQ</a>
-          <a href="/#contact">Contact</a>
+            <div className="footer-links-grid">
+              <div className="footer-col">
+                <h4>Navigation</h4>
+                <a href="/">Home</a>
+                <a href="/#about">About</a>
+                <a href="/#services">Services</a>
+                <a href="/funding">Funding</a>
+                <a href="/#results">Results</a>
+                <a href="/#faq">FAQ</a>
+                <a href="/#contact">Contact</a>
+              </div>
+
+              <div className="footer-col">
+                <h4>Services</h4>
+                <a href="/#services">Business Consulting</a>
+                <a href="/#services">Growth Strategy</a>
+                <a href="/#services">Operations Review</a>
+                <a href="/funding">Capital Strategy</a>
+              </div>
+
+              <div className="footer-col">
+                <h4>Legal</h4>
+                <a href="/privacy-policy">Privacy Policy</a>
+                <a href="/terms-of-service">Terms of Service</a>
+              </div>
+
+              <div className="footer-col">
+                <h4>Contact</h4>
+                <a href="/#contact">Book a Call</a>
+                <a href="mailto:hello@mazaliq.com">hello@mazaliq.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div className="footer-bottom">
+            <div className="footer-bottom-left">© 2026 Mazaliq. All rights reserved.</div>
+
+            <div className="footer-bottom-right">
+              <a href="/privacy-policy">Privacy Policy</a>
+              <a href="/terms-of-service">Terms of Service</a>
+            </div>
+          </div>
         </div>
-
-        <div className="footer-col">
-          <h4>Services</h4>
-          <a href="/#services">Business Consulting</a>
-          <a href="/#services">Growth Strategy</a>
-          <a href="/#services">Operations Review</a>
-          <a href="/funding">Capital Strategy</a>
-        </div>
-
-        <div className="footer-col">
-          <h4>Legal</h4>
-          <a href="/privacy-policy">Privacy Policy</a>
-          <a href="/terms-of-service">Terms of Service</a>
-        </div>
-
-        <div className="footer-col">
-          <h4>Contact</h4>
-          <a href="/#contact">Book a Call</a>
-          <a href="mailto:hello@mazaliq.com">hello@mazaliq.com</a>
-        </div>
-      </div>
-    </div>
-
-    <div className="footer-bottom">
-      <div className="footer-bottom-left">
-        © 2026 Mazaliq. All rights reserved.
-      </div>
-
-      <div className="footer-bottom-right">
-        <a href="/privacy-policy">Privacy Policy</a>
-        <a href="/terms-of-service">Terms of Service</a>
-      </div>
-    </div>
-  </div>
-</footer>
-
+      </footer>
     </main>
   );
 }
