@@ -1581,3 +1581,7 @@ a {
     font-size: 13px;
   }
 }
+
+.brand img {
+  transform: translateY(6px);
+}
