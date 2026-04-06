@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -14,10 +15,17 @@ body {
   color: #111827;
   background: #ffffff;
   overflow-x: hidden;
+  width: 100%;
 }
 
 body {
   line-height: 1.6;
+}
+
+main,
+section,
+div {
+  max-width: 100%;
 }
 
 img {
@@ -71,6 +79,8 @@ a {
 .site-header {
   position: sticky;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(10px);
@@ -148,6 +158,11 @@ a {
 
 .mobile-nav {
   display: none;
+  pointer-events: none;
+}
+
+.mobile-nav.open {
+  pointer-events: auto;
 }
 
 .hero {
@@ -428,8 +443,8 @@ a {
 }
 
 .funding-preview-section {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
+  width: 100%;
+  margin-left: 0;
   background: #fbfbfb;
 }
 
@@ -953,8 +968,15 @@ a {
   }
 
   .header-inner {
-    height: 74px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
     gap: 12px;
+    height: 74px;
+  }
+
+  .brand {
+    justify-self: start;
   }
 
   .brand img {
@@ -963,6 +985,14 @@ a {
 
   .desktop-nav {
     display: none;
+  }
+
+  .header-actions {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 0;
   }
 
   .mobile-menu-toggle {
@@ -1009,10 +1039,12 @@ a {
     backdrop-filter: blur(10px);
     border-top: 1px solid rgba(15, 23, 42, 0.06);
     transition: max-height 0.28s ease;
+    pointer-events: none;
   }
 
   .mobile-nav.open {
     max-height: 420px;
+    pointer-events: auto;
   }
 
   .mobile-nav-inner {
@@ -1409,39 +1441,6 @@ a {
   .funding-option-card .help-card-copy p {
     font-size: 14px;
   }
-
-  .blue-band {
-    padding: 56px 0;
-  }
-
-  .band-columns {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    margin-top: 26px;
-  }
-
-  .band-col {
-    text-align: left;
-    background: rgba(255, 255, 255, 0.58);
-    border: 1px solid rgba(63, 110, 202, 0.08);
-    padding: 18px;
-    border-radius: 16px;
-  }
-
-  .band-icon {
-    font-size: 22px;
-    margin-bottom: 8px;
-  }
-
-  .band-col h3 {
-    font-size: 15px;
-    margin-bottom: 6px;
-  }
-
-  .band-col p {
-    font-size: 14px;
-    line-height: 1.65;
-  }
 }
 
 @media (max-width: 520px) {
@@ -1455,10 +1454,6 @@ a {
 
   .legal-content p {
     font-size: 13px;
-  }
-
-  .band-col {
-    padding: 16px;
   }
 }
 
